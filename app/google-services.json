@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "802443630797",
+    "firebase_url": "https://kotlinchattake2.firebaseio.com",
+    "project_id": "kotlinchattake2",
+    "storage_bucket": "kotlinchattake2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:802443630797:android:be769ad70c576d9f",
+        "android_client_info": {
+          "package_name": "com.kyrylo.kotlinmessenger"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "802443630797-4it9de5593kpob8vhr8hi1u7mqv7jjgm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAr4H258ZoijjaE1w8ct9DUm8nvXseLstI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
