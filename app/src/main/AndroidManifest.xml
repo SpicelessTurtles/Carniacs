@@ -10,24 +10,30 @@
         android:name=".MvpApp"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".messages.LatestMessagesActivity">
+
+        <activity android:name=".splash.view.SplashMVPActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".registerlogin.RegisterActivity"/>
-        <activity android:name=".registerlogin.LoginActivity" />
+        <activity android:name=".latestmessages.view.LatestMessagesActivity"/>
+        <activity android:name=".register.view.RegisterActivity"/>
+        <activity android:name=".login.view.LoginActivity" />
         <activity android:name=".messages.NewMessageActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".messages.LatestMessagesActivity" />
+                android:value=".latestmessages.view.LatestMessagesActivity" />
+        </activity>
+        <activity android:name=".main.view.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".latestmessages.view.LatestMessagesActivity" />
         </activity>
         <activity android:name=".messages.ChatLogActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".messages.LatestMessagesActivity" />
+                android:value=".latestmessages.view.LatestMessagesActivity" />
         </activity>
     </application>
 

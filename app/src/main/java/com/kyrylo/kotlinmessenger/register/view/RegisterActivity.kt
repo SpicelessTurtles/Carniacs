@@ -1,9 +1,8 @@
-package com.kyrylo.kotlinmessenger.registerlogin
+package com.kyrylo.kotlinmessenger.register.view
 
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -13,14 +12,17 @@ import kotlinx.android.synthetic.main.activity_main.*
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
-import com.kyrylo.kotlinmessenger.messages.LatestMessagesActivity
+import com.kyrylo.kotlinmessenger.latestmessages.view.LatestMessagesActivity
 import com.kyrylo.kotlinmessenger.R
+import com.kyrylo.kotlinmessenger.base.view.BaseActivity
+import com.kyrylo.kotlinmessenger.login.view.LoginActivity
+import com.kyrylo.kotlinmessenger.main.view.MainActivity
 import com.kyrylo.kotlinmessenger.models.User
 import com.kyrylo.kotlinmessenger.utilities.showErrorMessage
 import java.util.*
 
 
-class RegisterActivity : AppCompatActivity() {
+class RegisterActivity  : BaseActivity(), RegisterMVPView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -139,14 +141,11 @@ class RegisterActivity : AppCompatActivity() {
                 .addOnSuccessListener {
                     progressBar_register.visibility = GONE
                     Log.d("RegisterActivity", "Finally we saved the user to Firebase Database")
-
-                    val intent = Intent(this, LatestMessagesActivity::class.java)
+                    val intent = Intent(this, MainActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                     startActivity(intent)
-
                 }.addOnFailureListener {
-                    showErrorMessage(this@RegisterActivity,it.message!!)
-
+                    showErrorMessage(this@RegisterActivity, it.message!!)
                     progressBar_register.visibility = GONE
                 }
     }

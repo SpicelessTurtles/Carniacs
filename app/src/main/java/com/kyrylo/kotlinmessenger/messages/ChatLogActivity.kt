@@ -9,6 +9,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.kyrylo.kotlinmessenger.R
+import com.kyrylo.kotlinmessenger.latestmessages.view.LatestMessagesActivity
 import com.kyrylo.kotlinmessenger.messages.NewMessageActivity.Companion.USER_KEY
 import com.kyrylo.kotlinmessenger.models.ChatMessage
 import com.kyrylo.kotlinmessenger.models.User

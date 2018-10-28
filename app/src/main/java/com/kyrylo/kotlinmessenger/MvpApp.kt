@@ -1,13 +1,12 @@
 package com.kyrylo.kotlinmessenger
 
 import android.app.Application
+import android.app.Activity
+import com.kyrylo.kotlinmessenger.di.component.DaggerAppComponent
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasActivityInjector
+import javax.inject.Inject
 
-//import android.app.Activity
-//import android.app.Application
-//import dagger.android.DispatchingAndroidInjector
-//import dagger.android.HasActivityInjector
-//import javax.inject.Inject
-/*
 class MvpApp : Application(), HasActivityInjector {
 
     @Inject
@@ -18,16 +17,11 @@ class MvpApp : Application(), HasActivityInjector {
 
     override fun onCreate() {
         super.onCreate()
-      /*  DaggerAppComponent.builder()
+
+        DaggerAppComponent.builder()
                 .application(this)
                 .build()
-                .inject(this)*/
+                .inject(this)
     }
 
-}*/
-class MvpApp : Application(){
-
-    override fun onCreate() {
-        super.onCreate()
-    }
 }

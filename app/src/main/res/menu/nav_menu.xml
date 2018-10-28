@@ -4,10 +4,12 @@
 
     <item android:id="@+id/menu_new_message"
         android:title="New Message"
+        android:icon="@drawable/ic_forum_black_24dp"
         app:showAsAction="ifRoom"/>
 
     <item android:id="@+id/menu_signed_out"
         android:title="Sign Out"
+        android:icon="@drawable/ic_supervisor_account_black_24dp"
         app:showAsAction="ifRoom"/>
 
 </menu>

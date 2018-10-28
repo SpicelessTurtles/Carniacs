@@ -1,4 +1,4 @@
-package com.kyrylo.kotlinmessenger.messages
+package com.kyrylo.kotlinmessenger.latestmessages.view
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -9,7 +9,6 @@ import android.graphics.Color
 import android.media.AudioAttributes
 import android.net.Uri
 import android.os.Build
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.DividerItemDecoration
 import android.util.Log
@@ -21,14 +20,32 @@ import com.kyrylo.kotlinmessenger.R
 import com.kyrylo.kotlinmessenger.R.mipmap.ic_launcher_round
 import com.kyrylo.kotlinmessenger.models.ChatMessage
 import com.kyrylo.kotlinmessenger.models.User
-import com.kyrylo.kotlinmessenger.registerlogin.RegisterActivity
+import com.kyrylo.kotlinmessenger.register.view.RegisterActivity
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_latest_messages.*
 import android.support.v4.app.NotificationCompat
+import com.kyrylo.kotlinmessenger.base.view.BaseActivity
+import com.kyrylo.kotlinmessenger.messages.ChatLogActivity
+import com.kyrylo.kotlinmessenger.messages.LatestMessageRow
+import com.kyrylo.kotlinmessenger.messages.NewMessageActivity
+import com.kyrylo.kotlinmessenger.latestmessages.interactor.LatestMessagesMVPInteractor
+import com.kyrylo.kotlinmessenger.latestmessages.presenter.LatestMessagesMVPPresenter
+import javax.inject.Inject
 
 
-class LatestMessagesActivity : AppCompatActivity() {
+class LatestMessagesActivity : BaseActivity() {
+
+    override fun onFragmentAttached() {
+
+    }
+
+    override fun onFragmentDetached(tag: String) {
+    }
+
+
+    @Inject
+    lateinit var presenter: LatestMessagesMVPPresenter<LatestMessagesMVPView, LatestMessagesMVPInteractor>
 
     companion object {
         var currentUser: User? = null
@@ -44,8 +61,6 @@ class LatestMessagesActivity : AppCompatActivity() {
     lateinit var builder: NotificationCompat.Builder
     private val channelId = "notificationExample"
     private val description = "hi"
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,7 +86,7 @@ class LatestMessagesActivity : AppCompatActivity() {
 
         fetchCurrentUser()
 
-        verifyIsUserLoggedIn()
+    //    verifyIsUserLoggedIn()
 
     }
 
@@ -159,23 +174,14 @@ class LatestMessagesActivity : AppCompatActivity() {
             override fun onDataChange(p0: DataSnapshot) {
                 currentUser = p0.getValue(User::class.java)
                 Log.d("Latest message:", "Current user ${currentUser?.username}")
-
             }
 
             override fun onCancelled(p0: DatabaseError) {
 
+
             }
 
         })
-    }
-
-    private fun verifyIsUserLoggedIn() {
-        val uid = FirebaseAuth.getInstance().uid
-        if (uid == null) {
-            val intent = Intent(this, RegisterActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)
-        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {

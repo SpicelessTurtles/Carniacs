@@ -1,4 +1,4 @@
-package com.kyrylo.kotlinmessenger.registerlogin
+package com.kyrylo.kotlinmessenger.login.view
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
@@ -9,7 +9,8 @@ import android.view.View.VISIBLE
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.kyrylo.kotlinmessenger.R
-import com.kyrylo.kotlinmessenger.messages.LatestMessagesActivity
+import com.kyrylo.kotlinmessenger.latestmessages.view.LatestMessagesActivity
+import com.kyrylo.kotlinmessenger.register.view.RegisterActivity
 import com.kyrylo.kotlinmessenger.utilities.showErrorMessage
 import kotlinx.android.synthetic.main.activity_login.*
 
