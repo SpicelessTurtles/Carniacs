@@ -10,7 +10,7 @@ import android.view.View
 import android.widget.ProgressBar
 import com.kyrylo.kotlinmessenger.utilities.CommonUtil
 import dagger.android.support.AndroidSupportInjection
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.android.synthetic.main.fragment_news.*
 
 

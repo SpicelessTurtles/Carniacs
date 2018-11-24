@@ -9,7 +9,7 @@ import android.view.View.VISIBLE
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.kyrylo.kotlinmessenger.R
-import com.kyrylo.kotlinmessenger.latestmessages.view.LatestMessagesActivity
+import com.kyrylo.kotlinmessenger.main.view.MainActivity
 import com.kyrylo.kotlinmessenger.register.view.RegisterActivity
 import com.kyrylo.kotlinmessenger.utilities.showErrorMessage
 import kotlinx.android.synthetic.main.activity_login.*
@@ -38,7 +38,7 @@ class LoginActivity : AppCompatActivity() {
 
                 progressBar_login.visibility = GONE
 
-                val intent = Intent(this, LatestMessagesActivity::class.java)
+                val intent = Intent(this, MainActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
 

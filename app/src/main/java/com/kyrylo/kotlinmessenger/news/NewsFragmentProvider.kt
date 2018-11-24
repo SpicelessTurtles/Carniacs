@@ -8,6 +8,6 @@ import dagger.android.ContributesAndroidInjector
 abstract class NewsFragmentProvider {
 
     @ContributesAndroidInjector(modules = [NewsFragmentModule::class])
-    internal abstract fun provideAboutFragment(): NewsFragment
+    internal abstract fun provideNewsFragment(): NewsFragment
 
 }

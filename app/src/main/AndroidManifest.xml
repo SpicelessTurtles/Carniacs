@@ -17,24 +17,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".latestmessages.view.LatestMessagesActivity"/>
         <activity android:name=".register.view.RegisterActivity"/>
         <activity android:name=".login.view.LoginActivity" />
         <activity android:name=".messages.NewMessageActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".latestmessages.view.LatestMessagesActivity" />
         </activity>
         <activity android:name=".main.view.MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".latestmessages.view.LatestMessagesActivity" />
+        <meta-data android:name="android.support.PARENT_ACTIVITY"
+            android:value=".main.view.MainActivity"/>
         </activity>
-        <activity android:name=".messages.ChatLogActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".latestmessages.view.LatestMessagesActivity" />
+        <activity android:name=".chat.view.ChatLogActivity">
         </activity>
+        <activity android:name=".article.view.ArticleActivity" />
     </application>
 
 </manifest>

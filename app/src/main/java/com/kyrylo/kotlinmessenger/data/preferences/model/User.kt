@@ -1,4 +1,4 @@
-package com.kyrylo.kotlinmessenger.models
+package com.kyrylo.kotlinmessenger.data.preferences.model
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

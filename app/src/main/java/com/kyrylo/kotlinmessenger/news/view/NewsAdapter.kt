@@ -15,6 +15,9 @@ import kotlinx.android.synthetic.main.news_item_list.view.*
 import android.view.Gravity
 import android.widget.ImageView
 import android.widget.TextView
+import com.kyrylo.kotlinmessenger.news.view.listener.onArticleClickListener
+import com.kyrylo.kotlinmessenger.news.view.viewholder.CarouselViewHolder
+import com.kyrylo.kotlinmessenger.news.view.viewholder.NewsViewHolder
 import com.synnapps.carouselview.CarouselView
 import com.synnapps.carouselview.ViewListener
 
@@ -29,17 +32,23 @@ class NewsAdapter(private val newsListItems: MutableList<ViewHolderItem>) : Recy
         internal val NEWS_ITEM = 1
     }
 
-    var myContext: Context? = null
+    var myContext: Context? = null//TODO:inject
+
+    private lateinit var articleClickListener: onArticleClickListener
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         myContext = parent.context
         return if (viewType == CAROUSEL_ITEM) {
-            val normalView = LayoutInflater.from(parent?.context).inflate(R.layout.carousel_item_list, parent, false)
-            CarouselViewHolder(normalView) // view holder for normal items
+            val normalView = LayoutInflater.from(parent.context).inflate(R.layout.carousel_item_list, parent, false)
+            CarouselViewHolder(normalView, myContext!!) // view holder for normal items
         } else {
-            val headerRow = LayoutInflater.from(parent?.context).inflate(R.layout.news_item_list, parent, false)
-            NewsViewHolder(headerRow) // view holder for header items
+            val headerRow = LayoutInflater.from(parent.context).inflate(R.layout.news_item_list, parent, false)
+            NewsViewHolder(headerRow,newsListItems, articleClickListener) // view holder for header items
         }
+    }
+
+    fun setOnArticleClickListener(onClickListener: onArticleClickListener){
+        articleClickListener = onClickListener
     }
 
     override fun getItemCount() = this.newsListItems.size
@@ -66,85 +75,10 @@ class NewsAdapter(private val newsListItems: MutableList<ViewHolderItem>) : Recy
         notifyDataSetChanged()
     }
 
-    inner class CarouselViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private var customCarouselView: CarouselView? = null
-        var testImages: IntArray = intArrayOf(R.drawable.carousel_slide_2, R.drawable.carousel_slide_3)
-
-        fun onBind(position: Int) {
-            customCarouselView = itemView.findViewById(R.id.carouselView)
-
-            customCarouselView?.pageCount = 2
-            customCarouselView?.setIndicatorVisibility(View.GONE)
-
-
-            val viewListener = ViewListener { position ->
-                val li = myContext?.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-                val customView = li.inflate(R.layout.view_custom, null)
-                val labelTextView = customView.findViewById<View>(R.id.labelTextView) as TextView
-                val fruitImageView = customView.findViewById<View>(R.id.fruitImageView) as ImageView
-
-                fruitImageView.setImageResource(testImages[position])
-
-                customCarouselView?.indicatorGravity = Gravity.CENTER_HORIZONTAL or Gravity.BOTTOM
-
-                customView
-            }
-
-            customCarouselView?.setViewListener(viewListener)
-        }
-    }
-
-    inner class NewsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-
-        fun clear() {
-            itemView.coverImageView.setImageDrawable(null)
-            itemView.titleTextView.text = ""
-            itemView.contentTextView.text = ""
-        }
-
-        fun onBind(position: Int) {
-
-            val (title, url, description, backgroundUrl) = newsListItems[position] as GoogleNews
-
-            inflateData(title, url, "", description, backgroundUrl)
-            setItemClickListener("")
-        }
-
-        private fun setItemClickListener(blogUrl: String?) {
-            itemView.setOnClickListener {
-                blogUrl?.let {
-                    try {
-                        val intent = Intent()
-                        // using "with" as an example
-                        with(intent) {
-                            action = Intent.ACTION_VIEW
-                            data = Uri.parse(it)
-                            addCategory(Intent.CATEGORY_BROWSABLE)
-                        }
-                        itemView.context.startActivity(intent)
-                    } catch (e: Exception) {
-                    }
-                }
-
-            }
-        }
-
-        private fun inflateData(title: String?, author: String?, date: String?, description: String?, coverPageUrl: String?) {
-            title?.let { itemView.titleTextView.text = it }
-            //  author?.let { itemView.authorTextView.text = it }
-            //  date?.let { itemView.dateTextView.text = it }
-            description?.let { itemView.contentTextView.text = it }
-            coverPageUrl?.let {
-                itemView.coverImageView.loadImage(it)
-            }
-        }
-
-    }
-
     override fun getItemViewType(position: Int): Int {
         return when (newsListItems[position]) {
-            is GoogleNews -> NEWS_ITEM
-            else -> CAROUSEL_ITEM
+            is GoogleNews -> NewsAdapter.NEWS_ITEM
+            else -> NewsAdapter.CAROUSEL_ITEM
         }
     }
 }

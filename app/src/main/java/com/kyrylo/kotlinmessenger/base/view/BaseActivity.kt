@@ -14,7 +14,6 @@ import kotlinx.android.synthetic.main.activity_main_main.*
  */
 abstract class BaseActivity : AppCompatActivity(), MVPView,BaseFragment.CallBack{
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         performDI()

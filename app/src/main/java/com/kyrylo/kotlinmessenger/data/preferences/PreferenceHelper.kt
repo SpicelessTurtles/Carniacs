@@ -1,5 +1,6 @@
 package com.kyrylo.kotlinmessenger.data.preferences
 
+import com.kyrylo.kotlinmessenger.data.preferences.model.User
 import com.kyrylo.kotlinmessenger.utilities.AppConstants
 
 /**
@@ -15,9 +16,9 @@ interface PreferenceHelper {
 
     fun setCurrentUserId(userId: Long?)
 
-    fun getCurrentUserName(): String
+    fun getCurrentUser(): User?
 
-    fun setCurrentUserName(userName: String?)
+    fun setCurrentUser(user: User?)
 
     fun getCurrentUserEmail(): String?
 
@@ -26,5 +27,9 @@ interface PreferenceHelper {
     fun getAccessToken(): String?
 
     fun setAccessToken(accessToken: String?)
+
+    fun setPartnerUserName(user: User?)
+
+    fun getPartnerUser():User?
 
 }

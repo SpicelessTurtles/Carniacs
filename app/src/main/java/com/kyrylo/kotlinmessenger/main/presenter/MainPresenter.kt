@@ -17,6 +17,7 @@ class MainPresenter<V : MainMVPView, I : MainMVPInteractor>
     override fun onAttach(view: V?) {
         super.onAttach(view)
         getUserData()
+        fetchCurrentUser()
         getView()?.openNewsFragment()
     }
 
@@ -24,9 +25,9 @@ class MainPresenter<V : MainMVPView, I : MainMVPInteractor>
 
    // override fun onDrawerOptionRateUsClick() = getView()?.openRateUsDialog()
 
-    override fun onDrawerOptionFeedClick() = getView()?.openFeedActivity()
+    override fun onLatestMessagesClick() = getView()?.openLatestMessagesFragment()
 
-    override fun onDrawerOptionAboutClick() = getView()?.openNewsFragment()
+    override fun onDrawerOptionNewsClick() = getView()?.openNewsFragment()
 
     override fun onDrawerOptionLogoutClick() {
         /* getView()?.showProgress()
@@ -53,4 +54,23 @@ class MainPresenter<V : MainMVPView, I : MainMVPInteractor>
       //  getView()?.inflateUserDetails(userData)
     }
 
+    override fun openChatFragment() {
+        getView()?.openChatFragment()
+    }
+
+    override fun onNewMessageClick() {
+        getView()?.openUsersFragment()
+    }
+
+    override fun onArticleActivityClick() {
+        getView()?.openArticleActivity()
+    }
+
+    private fun fetchCurrentUser() {
+        interactor.let {
+            it?.getCurrentUser()?.compose(schedulerProvider.ioToMainMaybeScheduler())?.subscribe { user ->
+                it.updateCurrentUserInSharedPref(user)
+            }
+        }
+    }
 }

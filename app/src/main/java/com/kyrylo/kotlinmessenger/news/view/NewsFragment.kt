@@ -3,6 +3,7 @@ package com.kyrylo.kotlinmessenger.news.view
 import android.os.Bundle
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ import android.view.Gravity
 import android.widget.ImageView
 import android.widget.TextView
 import com.kyrylo.kotlinmessenger.data.preferences.model.GoogleNews
+import com.kyrylo.kotlinmessenger.main.view.MainActivity
 import com.kyrylo.kotlinmessenger.news.interactor.NewsMVPInteractor
 import com.kyrylo.kotlinmessenger.news.presenter.NewsMVPPresenter
 import com.synnapps.carouselview.CarouselView
@@ -30,7 +32,6 @@ class NewsFragment : BaseFragment(), NewsMVPView {
     @Inject
     internal lateinit var presenter: NewsMVPPresenter<NewsMVPView, NewsMVPInteractor>
 
-
     companion object {
 
         internal val TAG = "NewsFragments"
@@ -41,6 +42,9 @@ class NewsFragment : BaseFragment(), NewsMVPView {
 
     }
 
+    override fun onArticleClick(article: GoogleNews) {
+        presenter.insertChoosenArticleToDatabase(article)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
             inflater.inflate(R.layout.fragment_news, container, false)
@@ -48,6 +52,7 @@ class NewsFragment : BaseFragment(), NewsMVPView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         presenter.onAttach(this)
+        newsAdapter.setOnArticleClickListener(this)
         super.onViewCreated(view, savedInstanceState)
     }
 

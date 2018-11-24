@@ -5,6 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
+    android:clickable="true"
+    android:focusable="true"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -27,7 +29,10 @@
         android:id="@+id/blog_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/news_item_list" />
+        tools:listitem="@layout/news_item_list"
+        android:clickable="true"
+        android:focusable="true"
+        />
 
     </LinearLayout>
 

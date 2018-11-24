@@ -21,7 +21,7 @@ ext{
     // Sdk and tools
     minSdkVersion = 16
     targetSdkVersion = 26
-    compileSdkVersion = 26
+    compileSdkVersion = 28
     buildToolsVersion = '26.0.2'
 
     // App dependencies
@@ -51,6 +51,7 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven { url "https://jitpack.io" }
     }
 }
 

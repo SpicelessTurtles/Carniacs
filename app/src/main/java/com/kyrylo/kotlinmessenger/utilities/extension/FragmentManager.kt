@@ -14,8 +14,8 @@ internal fun FragmentManager.removeFragment(tag: String,
     this.beginTransaction()
             .disallowAddToBackStack()
             .setCustomAnimations(slideIn, slideOut)
-            .remove(this.findFragmentByTag(tag))
-            .commitNow()
+            .remove(this.findFragmentByTag(tag)!!)
+            .commit()
 }
 
 internal fun FragmentManager.addFragment(containerViewId: Int,
@@ -23,7 +23,9 @@ internal fun FragmentManager.addFragment(containerViewId: Int,
                                          tag: String,
                                          slideIn: Int = R.anim.slide_left,
                                          slideOut: Int = R.anim.slide_right) {
-    this.beginTransaction().disallowAddToBackStack()
+    this.beginTransaction()
+            .addToBackStack(tag)
+            //.setCustomAnimations(slideIn, slideOut)
             .add(containerViewId, fragment, tag)
             .commit()
 }

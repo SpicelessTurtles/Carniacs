@@ -7,3 +7,6 @@ import javax.inject.Qualifier
  */
 @Qualifier
 @Retention annotation class PreferenceInfo
+
+@Qualifier
+@Retention annotation class UserUID

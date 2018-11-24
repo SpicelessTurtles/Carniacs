@@ -9,20 +9,18 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.kyrylo.kotlinmessenger.R
-import com.kyrylo.kotlinmessenger.models.User
-import com.squareup.picasso.Picasso
+import com.kyrylo.kotlinmessenger.chat.view.ChatLogActivity
+import com.kyrylo.kotlinmessenger.data.preferences.model.User
+import com.kyrylo.kotlinmessenger.users.view.viewholder.UserItem
 import com.xwray.groupie.GroupAdapter
-import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
-import kotlinx.android.synthetic.main.activity_new_message.*
-import kotlinx.android.synthetic.main.user_row_new_message.view.*
 
 class NewMessageActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_new_message)
+        setContentView(R.layout.fragment_new_message)
 
         supportActionBar?.title = "Select User"
 
@@ -57,7 +55,6 @@ class NewMessageActivity : AppCompatActivity() {
 
                     finish()
                 }
-                recycelview_newmessage.adapter = adapter
             }
 
             override fun onCancelled(p0: DatabaseError) {
@@ -67,15 +64,15 @@ class NewMessageActivity : AppCompatActivity() {
         })
     }
 
-    class UserItem(val user: User) : Item<ViewHolder>() {
-        override fun getLayout(): Int {
-            return R.layout.user_row_new_message
-        }
-
-        override fun bind(viewHolder: ViewHolder, position: Int) {
-            viewHolder.itemView.username_textview_new_message.text = user.username
-            Picasso.get().load(user.profileImageUri).into(viewHolder.itemView.imageview_new_message)
-        }
-
-    }
+//    class UserItem(val user: User) : Item<ViewHolder>() {
+//        override fun getLayout(): Int {
+//            return R.layout.user_row_new_message
+//        }
+//
+//        override fun bind(viewHolder: ViewHolder, position: Int) {
+//            viewHolder.itemView.username_textview_new_message.text = user.username
+//            Picasso.get().load(user.profileImageUri).into(viewHolder.itemView.imageview_new_message)
+//        }
+//
+//    }
 }

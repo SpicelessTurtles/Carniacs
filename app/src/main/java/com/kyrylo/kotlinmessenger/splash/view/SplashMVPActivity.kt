@@ -14,6 +14,12 @@ import kotlinx.android.synthetic.main.activity_splash.*
 import javax.inject.Inject
 
 class SplashMVPActivity : BaseActivity(), SplashMVPView {
+    override fun onFragmentAttached() {
+
+    }
+
+    override fun onFragmentDetached(tag: String) {
+    }
 
     @Inject
     lateinit var presenter: SplashMVPPresenter<SplashMVPView, SplashMVPInteractor>

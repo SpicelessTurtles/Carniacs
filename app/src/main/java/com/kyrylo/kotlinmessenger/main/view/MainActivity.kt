@@ -9,10 +9,10 @@ import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import com.kyrylo.kotlinmessenger.R
-import com.kyrylo.kotlinmessenger.R.id.*
 import com.kyrylo.kotlinmessenger.base.view.BaseActivity
+import com.kyrylo.kotlinmessenger.chat.view.ChatLogFragment
+import com.kyrylo.kotlinmessenger.latestmessages.view.LatestMessagesFragment
 import com.kyrylo.kotlinmessenger.login.view.LoginActivity
 import com.kyrylo.kotlinmessenger.main.interactor.MainMVPInteractor
 import com.kyrylo.kotlinmessenger.main.presenter.MainMVPPresenter
@@ -24,8 +24,14 @@ import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import kotlinx.android.synthetic.main.activity_main_main.*
 import kotlinx.android.synthetic.main.app_bar_navigation.*
+import java.util.*
 
 import javax.inject.Inject
+import android.os.Build
+import android.util.Log
+import com.kyrylo.kotlinmessenger.article.view.ArticleActivity
+import com.kyrylo.kotlinmessenger.users.view.UsersFragment
+
 
 class MainActivity : BaseActivity(), MainMVPView, NavigationView.OnNavigationItemSelectedListener, HasSupportFragmentInjector {
 
@@ -36,6 +42,9 @@ class MainActivity : BaseActivity(), MainMVPView, NavigationView.OnNavigationIte
     internal lateinit var fragmentDispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
 
 
+    //  var currentFragmentTag : String = NewsFragment.TAG//TODO: change logic of fragment transaction
+    var currentFragmentTag: LinkedList<String> = LinkedList()//TODO:WHAT ABOUT POPBACKSTUCK AH, BOY?
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_main)
@@ -44,14 +53,32 @@ class MainActivity : BaseActivity(), MainMVPView, NavigationView.OnNavigationIte
         presenter.onAttach(this)
     }
 
-    override fun onBackPressed() {
+    override fun onBackPressed() {//TODO:WHAT ABOUT POPBACKSTUCK AH, BOY?
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START)
         }
-       //  val fragment = supportFragmentManager.findFragmentByTag(NewsFragment.TAG)
 
-        super.onBackPressed()
-       // fragment?.let { onFragmentDetached() } ?: super.onBackPressed()
+        val fragmentManager = supportFragmentManager
+        val isStateSaved = fragmentManager.isStateSaved
+        if (isStateSaved && Build.VERSION.SDK_INT <= Build.VERSION_CODES.N_MR1) {
+            // Older versions will throw an exception from the framework
+            // FragmentManager.popBackStackImmediate(), so we'll just
+            // return here. The Activity is likely already on its way out
+            // since the fragmentManager has already been saved.
+            return
+        }
+        if (isStateSaved || !fragmentManager.popBackStackImmediate()) {
+            super.onBackPressed()
+        }
+
+        // val fragment = supportFragmentManager.findFragmentByTag(NewsFragment.TAG)
+
+        //  if (currentFragmentTag.last.equals(NewsFragment.TAG) && currentFragmentTag.size == 1) super.onBackPressed()
+
+        // onFragmentDetached(currentFragmentTag.last)
+        //  fragment?.let { onFragmentDetached(currentFragmentTag.last) }
+
+       // currentFragmentTag.pop()
     }
 
     override fun onDestroy() {
@@ -61,7 +88,7 @@ class MainActivity : BaseActivity(), MainMVPView, NavigationView.OnNavigationIte
 
     override fun onFragmentDetached(tag: String) {
         supportFragmentManager?.removeFragment(tag = tag)
-        unlockDrawer()
+        //  unlockDrawer()
     }
 
     override fun onFragmentAttached() {
@@ -103,14 +130,26 @@ class MainActivity : BaseActivity(), MainMVPView, NavigationView.OnNavigationIte
         finish()
     }
 
-    override fun openNewsFragment() {
-        supportFragmentManager.addFragment(R.id.cl_root_view, NewsFragment.newInstance(), NewsFragment.TAG)
+    override fun openArticleActivity() {
+        val intent = Intent(this, ArticleActivity::class.java)
+        startActivity(intent)
     }
 
-    override fun openFeedActivity() {
-        ///   val intent = Intent(this, FeedActivity::class.java)
-        //   startActivity(intent)
-    }
+    override fun openNewsFragment() =//TODO:WHAT ABOUT POPBACKSTUCK AH, BOY?
+        supportFragmentManager.addFragment(R.id.cl_root_view, NewsFragment.newInstance(), NewsFragment.TAG)
+
+
+    override fun openLatestMessagesFragment() =//TODO:WHAT ABOUT POPBACKSTUCK AH, BOY?
+        supportFragmentManager.addFragment(R.id.cl_root_view, LatestMessagesFragment.newInstance(), LatestMessagesFragment.TAG)
+
+
+    override fun openChatFragment() =//TODO:WHAT ABOUT POPBACKSTUCK AH, BOY?
+        supportFragmentManager.addFragment(R.id.cl_root_view, ChatLogFragment.newInstance(), ChatLogFragment.TAG)
+
+
+    override fun openUsersFragment() =
+            supportFragmentManager.addFragment(R.id.cl_root_view, UsersFragment.newInstance(), UsersFragment.TAG)
+
 
     override fun supportFragmentInjector() = fragmentDispatchingAndroidInjector
 
@@ -133,6 +172,14 @@ class MainActivity : BaseActivity(), MainMVPView, NavigationView.OnNavigationIte
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         val id = item?.getItemId()
+
+        when (id) {
+            R.id.menu_new_message ->
+                presenter.onLatestMessagesClick()
+
+            R.id.menu_users ->
+                presenter.onNewMessageClick()
+        }
 
         return super.onOptionsItemSelected(item)
     }

@@ -1,4 +1,4 @@
-package com.kyrylo.kotlinmessenger.messages
+package com.kyrylo.kotlinmessenger.latestmessages.view.viewholder
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -6,8 +6,8 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.kyrylo.kotlinmessenger.R
-import com.kyrylo.kotlinmessenger.models.ChatMessage
-import com.kyrylo.kotlinmessenger.models.User
+import com.kyrylo.kotlinmessenger.data.preferences.model.ChatMessage
+import com.kyrylo.kotlinmessenger.data.preferences.model.User
 import com.squareup.picasso.Picasso
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
@@ -46,7 +46,7 @@ class LatestMessageRow(val chatMessage: ChatMessage) : Item<ViewHolder>() {
 
                 val targetImageView = viewHolder.itemView.imageview_latest_message
 
-                Picasso.get().load(chatPartnerUser?.profileImageUri).into(targetImageView)
+                Picasso.get().load(chatPartnerUser?.profileImageUri).fit().into(targetImageView)
 
             }
         })

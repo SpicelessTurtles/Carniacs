@@ -8,25 +8,30 @@ import android.provider.MediaStore
 import android.util.Log
 import android.view.View.*
 import android.widget.Toast
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_register.*
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
-import com.kyrylo.kotlinmessenger.latestmessages.view.LatestMessagesActivity
 import com.kyrylo.kotlinmessenger.R
 import com.kyrylo.kotlinmessenger.base.view.BaseActivity
 import com.kyrylo.kotlinmessenger.login.view.LoginActivity
 import com.kyrylo.kotlinmessenger.main.view.MainActivity
-import com.kyrylo.kotlinmessenger.models.User
+import com.kyrylo.kotlinmessenger.data.preferences.model.User
 import com.kyrylo.kotlinmessenger.utilities.showErrorMessage
 import java.util.*
 
 
 class RegisterActivity  : BaseActivity(), RegisterMVPView {
+    override fun onFragmentAttached() {
+
+    }
+
+    override fun onFragmentDetached(tag: String) {
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_register)
         supportActionBar?.hide()
 
         progressBar_register.visibility = GONE

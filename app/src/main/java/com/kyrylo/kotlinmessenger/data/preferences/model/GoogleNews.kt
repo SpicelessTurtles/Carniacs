@@ -1,8 +1,8 @@
 package com.kyrylo.kotlinmessenger.data.preferences.model
 
+import android.arch.persistence.room.Entity
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-
 data class GoogleNews(
         @Expose
         @SerializedName("title")
@@ -15,4 +15,7 @@ data class GoogleNews(
         var description: String? = null,
         @Expose
         @SerializedName("urlToImage")
-        var backgroudnImageUrl: String? = null) : ViewHolderItem
+        var backgroudnImageUrl: String? = null,
+        @SerializedName("content")
+        @Expose
+        var content : String? = null) : ViewHolderItem
