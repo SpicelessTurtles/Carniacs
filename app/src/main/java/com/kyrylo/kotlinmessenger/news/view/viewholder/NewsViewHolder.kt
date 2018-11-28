@@ -36,7 +36,7 @@ class NewsViewHolder(val view: View, val newsListItems: MutableList<ViewHolderIt
                         presenter.onArticleActivityClick()
                     }
                 } catch (e: Exception) {
-                   Log.d("exc",e.message)
+                   Log.d("exception","" + e.message)
                 }
             }
 

@@ -5,7 +5,7 @@
     android:id="@+id/main_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_blue_dark"
+    android:background="@drawable/background_with_no_logo"
     tools:context=".register.view.RegisterActivity">
 
     <EditText
@@ -57,24 +57,32 @@
         android:id="@+id/login_button_register"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Register"
+        android:layout_marginTop="52dp"
         android:background="@drawable/rounded_button"
+        android:text="Register"
         app:layout_constraintEnd_toEndOf="@+id/password_edittext_register"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/password_edittext_register"
         app:layout_constraintTop_toBottomOf="@+id/password_edittext_register" />
 
     <TextView
         android:id="@+id/already_have_account_textview"
         android:layout_width="wrap_content"
-        android:layout_height="18dp"
-        android:layout_marginEnd="8dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="47dp"
+        android:fontFamily="@font/brush_script_mt"
         android:text="Already have an account?"
+        android:textColor="@color/toolbar_background"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/login_button_register"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="@+id/login_button_register"
-        app:layout_constraintTop_toBottomOf="@+id/login_button_register" />
+        app:layout_constraintTop_toBottomOf="@+id/login_button_register"
+        app:layout_constraintVertical_bias="0.125" />
 
     <Button
         android:id="@+id/select_photo"
@@ -86,6 +94,8 @@
         android:layout_marginTop="28dp"
         android:background="@drawable/rounded_select_photo_button"
         android:text="Select Photo"
+        android:textSize="20sp"
+        android:fontFamily="@font/brush_script_mt"
         app:layout_constraintBottom_toTopOf="@+id/username_register"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -96,6 +106,7 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         app:civ_border_width="4dp"
+        app:civ_circle_background_color="@color/yellow"
         app:layout_constraintBottom_toBottomOf="@+id/select_photo"
         app:layout_constraintEnd_toEndOf="@+id/select_photo"
         app:layout_constraintStart_toStartOf="@+id/select_photo"

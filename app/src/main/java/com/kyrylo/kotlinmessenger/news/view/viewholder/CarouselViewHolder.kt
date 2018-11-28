@@ -8,25 +8,30 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import com.kyrylo.kotlinmessenger.R
+import com.kyrylo.kotlinmessenger.data.preferences.model.GoogleNews
+import com.kyrylo.kotlinmessenger.utilities.extension.loadImage
 import com.synnapps.carouselview.CarouselView
 import com.synnapps.carouselview.ViewListener
 
-class CarouselViewHolder(view: View, var myContext: Context) : RecyclerView.ViewHolder(view) {
+class CarouselViewHolder(view: View, var myContext: Context, var blogs: List<GoogleNews>) : RecyclerView.ViewHolder(view) {
+
     private var customCarouselView: CarouselView? = null
+
     var testImages: IntArray = intArrayOf(R.drawable.carousel_slide_2, R.drawable.carousel_slide_3)
 
-    fun onBind(position: Int) {
+    fun onBind() {
         customCarouselView = itemView.findViewById(R.id.carouselView)
-
         customCarouselView?.pageCount = 2
         customCarouselView?.setIndicatorVisibility(View.GONE)
 
-
         val viewListener = ViewListener { position ->
-            val li = myContext?.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+            val li = myContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
             val customView = li.inflate(R.layout.view_custom, null)
             val labelTextView = customView.findViewById<View>(R.id.labelTextView) as TextView
             val fruitImageView = customView.findViewById<View>(R.id.fruitImageView) as ImageView
+
+            labelTextView.text = blogs[position].title
+            fruitImageView.loadImage(blogs[position].backgroudnImageUrl!!)
 
             fruitImageView.setImageResource(testImages[position])
 

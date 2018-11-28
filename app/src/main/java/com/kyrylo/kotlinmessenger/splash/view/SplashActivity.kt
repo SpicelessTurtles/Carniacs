@@ -13,13 +13,7 @@ import com.kyrylo.kotlinmessenger.splash.presenter.SplashMVPPresenter
 import kotlinx.android.synthetic.main.activity_splash.*
 import javax.inject.Inject
 
-class SplashMVPActivity : BaseActivity(), SplashMVPView {
-    override fun onFragmentAttached() {
-
-    }
-
-    override fun onFragmentDetached(tag: String) {
-    }
+class SplashActivity : BaseActivity(), SplashMVPView {
 
     @Inject
     lateinit var presenter: SplashMVPPresenter<SplashMVPView, SplashMVPInteractor>
@@ -43,8 +37,8 @@ class SplashMVPActivity : BaseActivity(), SplashMVPView {
     }
 
     override fun logoAnimation(){
-        val backgroundAnim : Animation = AnimationUtils.loadAnimation(this@SplashMVPActivity,R.anim.splash_transition)
-        val logoAnim : Animation = AnimationUtils.loadAnimation(this@SplashMVPActivity,R.anim.slight_right_logo)
+        val backgroundAnim : Animation = AnimationUtils.loadAnimation(this@SplashActivity,R.anim.splash_transition)
+        val logoAnim : Animation = AnimationUtils.loadAnimation(this@SplashActivity,R.anim.slight_right_logo)
         splashscreen_background.startAnimation(backgroundAnim)
         splashscreen_logo.startAnimation(logoAnim)
     }

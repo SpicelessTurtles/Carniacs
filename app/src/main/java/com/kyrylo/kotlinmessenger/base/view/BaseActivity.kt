@@ -7,28 +7,31 @@ import android.view.View
 import android.widget.ProgressBar
 import com.kyrylo.kotlinmessenger.utilities.CommonUtil
 import dagger.android.AndroidInjection
+import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_main_main.*
 
 /**
  * Created by jyotidubey on 04/01/18.
  */
-abstract class BaseActivity : AppCompatActivity(), MVPView,BaseFragment.CallBack{
+abstract class BaseActivity : DaggerAppCompatActivity(), MVPView,BaseFragment.CallBack{
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         performDI()
     }
 
-
     override fun hideProgress() {
-  //      if (progressBar_loader != null && progressBar_loader?.visibility == View.VISIBLE) {
-  //          progressBar_loader.visibility = View.GONE
-  //      }
+
     }
 
     override fun showProgress() {
-     //   hideProgress()
-     //   progressBar_loader.visibility = View.VISIBLE
+
+    }
+
+    override fun onFragmentAttached() {
+    }
+
+    override fun onFragmentDetached(tag: String) {
     }
 
     private fun performDI() = AndroidInjection.inject(this)

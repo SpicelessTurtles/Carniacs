@@ -24,11 +24,9 @@ import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import kotlinx.android.synthetic.main.activity_main_main.*
 import kotlinx.android.synthetic.main.app_bar_navigation.*
-import java.util.*
 
 import javax.inject.Inject
 import android.os.Build
-import android.util.Log
 import com.kyrylo.kotlinmessenger.article.view.ArticleActivity
 import com.kyrylo.kotlinmessenger.users.view.UsersFragment
 
@@ -41,19 +39,14 @@ class MainActivity : BaseActivity(), MainMVPView, NavigationView.OnNavigationIte
     @Inject
     internal lateinit var fragmentDispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
 
-
-    //  var currentFragmentTag : String = NewsFragment.TAG//TODO: change logic of fragment transaction
-    var currentFragmentTag: LinkedList<String> = LinkedList()//TODO:WHAT ABOUT POPBACKSTUCK AH, BOY?
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_main)
         setUpDrawerMenu()
-        //setupCardContainerView()
         presenter.onAttach(this)
     }
 
-    override fun onBackPressed() {//TODO:WHAT ABOUT POPBACKSTUCK AH, BOY?
+    override fun onBackPressed() {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START)
         }
@@ -70,15 +63,6 @@ class MainActivity : BaseActivity(), MainMVPView, NavigationView.OnNavigationIte
         if (isStateSaved || !fragmentManager.popBackStackImmediate()) {
             super.onBackPressed()
         }
-
-        // val fragment = supportFragmentManager.findFragmentByTag(NewsFragment.TAG)
-
-        //  if (currentFragmentTag.last.equals(NewsFragment.TAG) && currentFragmentTag.size == 1) super.onBackPressed()
-
-        // onFragmentDetached(currentFragmentTag.last)
-        //  fragment?.let { onFragmentDetached(currentFragmentTag.last) }
-
-       // currentFragmentTag.pop()
     }
 
     override fun onDestroy() {
@@ -88,7 +72,6 @@ class MainActivity : BaseActivity(), MainMVPView, NavigationView.OnNavigationIte
 
     override fun onFragmentDetached(tag: String) {
         supportFragmentManager?.removeFragment(tag = tag)
-        //  unlockDrawer()
     }
 
     override fun onFragmentAttached() {
@@ -118,12 +101,6 @@ class MainActivity : BaseActivity(), MainMVPView, NavigationView.OnNavigationIte
 
     override fun unlockDrawer() = drawer?.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
 
-
-    //override fun inflateUserDetails(userDetails: Pair<String?, String?>) {
-    //  navView.getHeaderView(0).nav_name.text = userDetails.first
-    //   navView.getHeaderView(0).nav_email.text = userDetails.second
-    // }
-
     override fun openLoginActivity() {
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
@@ -135,20 +112,20 @@ class MainActivity : BaseActivity(), MainMVPView, NavigationView.OnNavigationIte
         startActivity(intent)
     }
 
-    override fun openNewsFragment() =//TODO:WHAT ABOUT POPBACKSTUCK AH, BOY?
+    override fun openNewsFragment() =
         supportFragmentManager.addFragment(R.id.cl_root_view, NewsFragment.newInstance(), NewsFragment.TAG)
 
 
-    override fun openLatestMessagesFragment() =//TODO:WHAT ABOUT POPBACKSTUCK AH, BOY?
+    override fun openLatestMessagesFragment() =
         supportFragmentManager.addFragment(R.id.cl_root_view, LatestMessagesFragment.newInstance(), LatestMessagesFragment.TAG)
 
 
-    override fun openChatFragment() =//TODO:WHAT ABOUT POPBACKSTUCK AH, BOY?
+    override fun openChatFragment() =
         supportFragmentManager.addFragment(R.id.cl_root_view, ChatLogFragment.newInstance(), ChatLogFragment.TAG)
 
 
     override fun openUsersFragment() =
-            supportFragmentManager.addFragment(R.id.cl_root_view, UsersFragment.newInstance(), UsersFragment.TAG)
+        supportFragmentManager.addFragment(R.id.cl_root_view, UsersFragment.newInstance(), UsersFragment.TAG)
 
 
     override fun supportFragmentInjector() = fragmentDispatchingAndroidInjector

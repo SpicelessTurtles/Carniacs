@@ -2,38 +2,41 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/b"
+    android:id="@+id/body"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_blue_light"
+    android:background="@drawable/background_with_no_logo"
     tools:context=".registerlogin.LoginActivity">
+
     <EditText
         android:id="@+id/email_edittext_login"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:layout_marginEnd="32dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="75dp"
+        android:layout_marginEnd="32dp"
         android:background="@drawable/rounded_edittext_register_login"
         android:ems="10"
         android:hint="Username"
-        android:paddingLeft="15dp"
         android:inputType="textPersonName"
+        android:paddingLeft="15dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <EditText
         android:id="@+id/password_edittext_login"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/rounded_edittext_register_login"
         android:ems="10"
         android:hint="Password"
-        android:paddingLeft="15dp"
         android:inputType="textEmailAddress"
+        android:paddingLeft="15dp"
         app:layout_constraintEnd_toEndOf="@+id/email_edittext_login"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/email_edittext_login"
         app:layout_constraintTop_toBottomOf="@+id/email_edittext_login" />
 
@@ -42,10 +45,11 @@
         android:id="@+id/login_button_login"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/rounded_button"
         android:text="Login"
         app:layout_constraintEnd_toEndOf="@+id/password_edittext_login"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/password_edittext_login"
         app:layout_constraintTop_toBottomOf="@+id/password_edittext_login" />
 
@@ -53,13 +57,19 @@
         android:id="@+id/back_to_register_textview"
         android:layout_width="wrap_content"
         android:layout_height="18dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/brush_script_mt"
         android:text="Back to registration"
+        android:textColor="@color/toolbar_background"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/login_button_login"
         app:layout_constraintStart_toStartOf="@+id/login_button_login"
-        app:layout_constraintTop_toBottomOf="@+id/login_button_login" />
+        app:layout_constraintTop_toBottomOf="@+id/login_button_login"
+        app:layout_constraintVertical_bias="0.326" />
 
     <ProgressBar
         android:id="@+id/progressBar_login"
@@ -67,14 +77,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="323dp"
+        android:layout_height="102dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:src="@drawable/carniacs"
+        app:layout_constraintBottom_toTopOf="@+id/progressBar_login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.492" />
 
 
 </android.support.constraint.ConstraintLayout>

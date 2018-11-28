@@ -8,6 +8,7 @@ import com.kyrylo.kotlinmessenger.news.presenter.NewsPresenter
 import com.kyrylo.kotlinmessenger.news.view.NewsAdapter
 import com.kyrylo.kotlinmessenger.news.view.NewsFragment
 import com.kyrylo.kotlinmessenger.news.view.NewsMVPView
+import com.kyrylo.kotlinmessenger.main.view.MainActivity
 import dagger.Module
 import dagger.Provides
 import java.util.ArrayList
@@ -23,7 +24,8 @@ class NewsFragmentModule {
             : NewsMVPPresenter<NewsMVPView, NewsMVPInteractor> = presenter
 
     @Provides
-    internal fun provideNewsAdapter(): NewsAdapter = NewsAdapter(ArrayList())
+    internal fun provideNewsAdapter(activity: MainActivity): NewsAdapter = NewsAdapter(ArrayList(), activity.baseContext)
+
 
     @Provides
     internal fun provideLinearLayoutManager(fragment: NewsFragment): LinearLayoutManager = LinearLayoutManager(fragment.activity)

@@ -27,7 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="bottom"
-        android:layout_marginBottom="25dp"
+        android:layout_marginStart="10dp"
         android:textColor="@color/white"
         android:text="Hot cars and girls is everything you need"/>
 

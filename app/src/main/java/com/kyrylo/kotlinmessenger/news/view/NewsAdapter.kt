@@ -25,29 +25,28 @@ import com.synnapps.carouselview.ViewListener
 /**
  * Created by jyotidubey on 14/01/18.
  */
-class NewsAdapter(private val newsListItems: MutableList<ViewHolderItem>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class NewsAdapter(private val newsListItems: MutableList<ViewHolderItem>, private val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
         internal val CAROUSEL_ITEM = 0
         internal val NEWS_ITEM = 1
     }
 
-    var myContext: Context? = null//TODO:inject
-
     private lateinit var articleClickListener: onArticleClickListener
 
+    private var carouselNews: MutableList<GoogleNews> = ArrayList()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        myContext = parent.context
         return if (viewType == CAROUSEL_ITEM) {
             val normalView = LayoutInflater.from(parent.context).inflate(R.layout.carousel_item_list, parent, false)
-            CarouselViewHolder(normalView, myContext!!) // view holder for normal items
+            CarouselViewHolder(normalView, context, carouselNews) // view holder for normal items
         } else {
             val headerRow = LayoutInflater.from(parent.context).inflate(R.layout.news_item_list, parent, false)
-            NewsViewHolder(headerRow,newsListItems, articleClickListener) // view holder for header items
+            NewsViewHolder(headerRow, newsListItems, articleClickListener) // view holder for header items
         }
     }
 
-    fun setOnArticleClickListener(onClickListener: onArticleClickListener){
+    fun setOnArticleClickListener(onClickListener: onArticleClickListener) {
         articleClickListener = onClickListener
     }
 
@@ -58,7 +57,7 @@ class NewsAdapter(private val newsListItems: MutableList<ViewHolderItem>) : Recy
         val itemType = getItemViewType(position)
 
         if (itemType == CAROUSEL_ITEM) {
-            (holder as CarouselViewHolder).onBind(position)
+            (holder as CarouselViewHolder).onBind()
         } else if (itemType == NEWS_ITEM) {
             with(it as NewsViewHolder) {
                 clear()
@@ -66,10 +65,12 @@ class NewsAdapter(private val newsListItems: MutableList<ViewHolderItem>) : Recy
             }
         }
 
-
     }
 
     internal fun addNewsToList(blogs: List<GoogleNews>, carouselView: CustomCarouselView) {
+        this.carouselNews.add(blogs[0])
+        this.carouselNews.add(blogs[1])
+
         this.newsListItems.add(carouselView)
         this.newsListItems.addAll(blogs)
         notifyDataSetChanged()
