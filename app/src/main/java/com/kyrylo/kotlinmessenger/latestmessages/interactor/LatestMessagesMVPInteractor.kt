@@ -10,6 +10,5 @@ import io.reactivex.Maybe
 interface LatestMessagesMVPInteractor : MVPInteractor {
     fun getLatestMessages(): Flowable<RxFirebaseChildEvent<ChatMessage>>
     fun getCurrentUser(): Maybe<User>
-    fun updateCurrentUserInSharedPref(currentUsername: User?)
     fun updatePartnerUserInSharedPref(partnerUsername: User?)
 }

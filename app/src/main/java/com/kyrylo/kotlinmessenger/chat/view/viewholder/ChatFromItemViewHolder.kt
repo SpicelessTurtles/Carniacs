@@ -19,6 +19,7 @@ class ChatFromItemViewHolder(val text: String, val user: User) : Item<ViewHolder
         //load user image into the star
         val uri = user.profileImageUri
         val targetImageView = viewHolder.itemView.imageView_chat_from_row
+
         Picasso.get().load(uri).fit().into(targetImageView)
     }
 }

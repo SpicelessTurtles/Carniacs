@@ -6,7 +6,6 @@ import com.kyrylo.kotlinmessenger.news.interactor.NewsMVPInteractor
 import com.kyrylo.kotlinmessenger.news.view.NewsMVPView
 
 interface NewsMVPPresenter<V : NewsMVPView, I : NewsMVPInteractor> : MVPPresenter<V, I> {
-
     fun onViewPrepared()
     fun insertChoosenArticleToDatabase(choosenArticle : GoogleNews)
 }

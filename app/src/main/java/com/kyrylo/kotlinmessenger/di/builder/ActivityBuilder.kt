@@ -8,6 +8,7 @@ import com.kyrylo.kotlinmessenger.login.LoginActivityModule
 import com.kyrylo.kotlinmessenger.login.view.LoginActivity
 import com.kyrylo.kotlinmessenger.main.view.MainActivity
 import com.kyrylo.kotlinmessenger.news.NewsFragmentProvider
+import com.kyrylo.kotlinmessenger.profile.ProfileFragmentProvider
 import com.kyrylo.kotlinmessenger.register.RegisterActivityModule
 import com.kyrylo.kotlinmessenger.register.view.RegisterActivity
 import com.kyrylo.kotlinmessenger.splash.SplashActivityModule
@@ -35,7 +36,7 @@ abstract class ActivityBuilder {
     @ContributesAndroidInjector(modules = [(ArticleActivityModule::class)])
     abstract fun bindArticleActivity(): ArticleActivity
 
-    @ContributesAndroidInjector(modules = [(MainActivityModule::class), (NewsFragmentProvider::class), (LatestMessagesFragmentProvider::class), (ChatLogFragmentProvider::class), (UsersFragmentProvider::class)])
+    @ContributesAndroidInjector(modules = [(MainActivityModule::class), (NewsFragmentProvider::class), (LatestMessagesFragmentProvider::class), (ChatLogFragmentProvider::class), (UsersFragmentProvider::class), (ProfileFragmentProvider::class)])
     abstract fun bindMainActivity(): MainActivity
 
 }

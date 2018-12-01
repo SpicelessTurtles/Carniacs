@@ -10,7 +10,7 @@ import com.kyrylo.kotlinmessenger.main.view.MainMVPView
 interface MainMVPPresenter<V : MainMVPView, I : MainMVPInteractor> : MVPPresenter<V, I> {
 
     fun onDrawerOptionNewsClick() : Unit?
- //   fun onDrawerOptionRateUsClick(): Unit?
+    fun onDrawerOptionProfileClick() : Unit?
     fun onLatestMessagesClick(): Unit?
     fun onDrawerOptionLogoutClick()
     fun openChatFragment()

@@ -48,7 +48,7 @@ class UsersFragment : BaseFragment(), UsersMVPView {
     }
 
     override fun openChatFragment() =
-        (getBaseActivity() as MainActivity).presenter.openChatFragment()
+        getMainActivity().presenter.openChatFragment()
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =

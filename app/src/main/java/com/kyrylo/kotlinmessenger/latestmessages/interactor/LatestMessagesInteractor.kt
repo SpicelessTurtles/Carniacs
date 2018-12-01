@@ -16,11 +16,6 @@ class LatestMessagesInteractor @Inject internal constructor(preferenceHelper: Pr
 
     override fun getLatestMessages(): Flowable<RxFirebaseChildEvent<ChatMessage>> = apiHelper.performLatestMessagesListener()
     override fun getCurrentUser(): Maybe<User> = apiHelper.performCatchLastUser()
-    override fun updateCurrentUserInSharedPref(currentUsername: User?){
-        preferenceHelper.let {
-            it.setCurrentUser(currentUsername)
-        }
-    }
 
     override fun updatePartnerUserInSharedPref(partnerUsername: User?) {
         preferenceHelper.let {

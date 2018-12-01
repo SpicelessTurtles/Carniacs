@@ -2,16 +2,12 @@ package com.kyrylo.kotlinmessenger.chat.presenter
 
 import android.util.Log
 import com.google.android.gms.tasks.OnSuccessListener
-import com.google.firebase.database.ChildEventListener
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
+
 import com.kyrylo.kotlinmessenger.base.presenter.BasePresenter
 import com.kyrylo.kotlinmessenger.chat.interactor.ChatLogMVPInteractor
 import com.kyrylo.kotlinmessenger.chat.view.ChatLogMVPView
 import com.kyrylo.kotlinmessenger.chat.view.viewholder.ChatFromItemViewHolder
 import com.kyrylo.kotlinmessenger.chat.view.viewholder.ChatToItemViewHolder
-import com.kyrylo.kotlinmessenger.data.preferences.model.ChatMessage
 import com.kyrylo.kotlinmessenger.utilities.SchedulerProvider
 import durdinapps.rxfirebase2.RxFirebaseChildEvent
 import io.reactivex.disposables.CompositeDisposable

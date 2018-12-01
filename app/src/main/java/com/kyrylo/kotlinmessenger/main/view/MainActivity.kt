@@ -28,6 +28,7 @@ import kotlinx.android.synthetic.main.app_bar_navigation.*
 import javax.inject.Inject
 import android.os.Build
 import com.kyrylo.kotlinmessenger.article.view.ArticleActivity
+import com.kyrylo.kotlinmessenger.profile.view.ProfileFragment
 import com.kyrylo.kotlinmessenger.users.view.UsersFragment
 
 
@@ -78,28 +79,24 @@ class MainActivity : BaseActivity(), MainMVPView, NavigationView.OnNavigationIte
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        /* when (item.itemId) {
-             R.id.navItemAbout -> {
-                 presenter.onDrawerOptionAboutClick()
+         when (item.itemId) {
+             R.id.news -> {
+                 presenter.onDrawerOptionNewsClick()
              }
-             R.id.navItemRateUs -> {
-                 presenter.onDrawerOptionRateUsClick()
+             R.id.profile -> {
+                presenter.onDrawerOptionProfileClick()
              }
-             R.id.navItemFeed -> {
-                 presenter.onDrawerOptionFeedClick()
+             R.id.cars -> {
+                 //  presenter.onDrawerOptionRateUsClick()
              }
-             R.id.navItemLogout -> {
+             R.id.logout -> {
                  presenter.onDrawerOptionLogoutClick()
              }
          }
-         drawerLayout.closeDrawer(GravityCompat.START)
-         */
+
+         drawer.closeDrawer(GravityCompat.START)
         return true
     }
-
-    override fun lockDrawer() = drawer?.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
-
-    override fun unlockDrawer() = drawer?.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
 
     override fun openLoginActivity() {
         val intent = Intent(this, LoginActivity::class.java)
@@ -111,6 +108,9 @@ class MainActivity : BaseActivity(), MainMVPView, NavigationView.OnNavigationIte
         val intent = Intent(this, ArticleActivity::class.java)
         startActivity(intent)
     }
+
+    override fun supportFragmentInjector() = fragmentDispatchingAndroidInjector
+
 
     override fun openNewsFragment() =
         supportFragmentManager.addFragment(R.id.cl_root_view, NewsFragment.newInstance(), NewsFragment.TAG)
@@ -127,20 +127,9 @@ class MainActivity : BaseActivity(), MainMVPView, NavigationView.OnNavigationIte
     override fun openUsersFragment() =
         supportFragmentManager.addFragment(R.id.cl_root_view, UsersFragment.newInstance(), UsersFragment.TAG)
 
+    override fun openProfileFragment() =
+            supportFragmentManager.addFragment(R.id.cl_root_view, ProfileFragment.newInstance(), ProfileFragment.TAG)
 
-    override fun supportFragmentInjector() = fragmentDispatchingAndroidInjector
-
-    private fun setUpDrawerMenu() {
-        setSupportActionBar(toolbar)
-        val toggle = ActionBarDrawerToggle(
-                this, drawer, toolbar,
-                R.string.navigation_drawer_open, R.string.navigation_drawer_close)
-        drawer.addDrawerListener(toggle)
-        toggle.syncState()
-        navView.setNavigationItemSelectedListener(this)
-
-        supportActionBar?.setDisplayShowTitleEnabled(false)
-    }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         getMenuInflater().inflate(R.menu.nav_menu, menu)
@@ -160,4 +149,20 @@ class MainActivity : BaseActivity(), MainMVPView, NavigationView.OnNavigationIte
 
         return super.onOptionsItemSelected(item)
     }
+
+    private fun setUpDrawerMenu() {
+        setSupportActionBar(toolbar)
+        val toggle = ActionBarDrawerToggle(
+                this, drawer, toolbar,
+                R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        drawer.addDrawerListener(toggle)
+        toggle.syncState()
+        navView.setNavigationItemSelectedListener(this)
+
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+    }
+
+    override fun lockDrawer() = drawer?.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+
+    override fun unlockDrawer() = drawer?.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
 }

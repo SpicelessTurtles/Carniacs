@@ -21,37 +21,35 @@ class MainPresenter<V : MainMVPView, I : MainMVPInteractor>
         getView()?.openNewsFragment()
     }
 
-  //  override fun refreshQuestionCards() = getQuestionCards()
+    //  override fun refreshQuestionCards() = getQuestionCards()
 
-   // override fun onDrawerOptionRateUsClick() = getView()?.openRateUsDialog()
+    // override fun onDrawerOptionRateUsClick() = getView()?.openRateUsDialog()
 
     override fun onLatestMessagesClick() = getView()?.openLatestMessagesFragment()
 
     override fun onDrawerOptionNewsClick() = getView()?.openNewsFragment()
 
+    override fun onDrawerOptionProfileClick() = getView()?.openProfileFragment()
+
     override fun onDrawerOptionLogoutClick() {
-        /* getView()?.showProgress()
-         interactor?.let {
-             compositeDisposable.add(
-                     it.makeLogoutApiCall()
-                             .compose(schedulerProvider.ioToMainObservableScheduler())
-                             .subscribe({
-                                 interactor?.performUserLogout()
-                                 getView()?.let {
-                                     it.hideProgress()
-                                     it.openLoginActivity()
-                                 }
-                             }, { err -> println(err) }))
-         }*/
+        getView()?.showProgress()
+        interactor?.let {
+
+            interactor?.performUserLogout()
+
+            getView()?.let {
+                it.hideProgress()
+                it.openLoginActivity()
+            }
+
+        }
 
     }
 
 
-
-
     private fun getUserData() = interactor?.let {
-    //    val userData = it.getUserDetails()
-      //  getView()?.inflateUserDetails(userData)
+        //    val userData = it.getUserDetails()
+        //  getView()?.inflateUserDetails(userData)
     }
 
     override fun openChatFragment() {

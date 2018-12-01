@@ -10,6 +10,8 @@ interface PreferenceHelper {
 
     fun getCurrentUserLoggedInMode(): Int
 
+    fun cleanSharedPreference()
+
     fun setCurrentUserLoggedInMode(mode: AppConstants.LoggedInMode)
 
     fun getCurrentUserId(): Long?

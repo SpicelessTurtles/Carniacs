@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.View
 import android.widget.ProgressBar
+import com.kyrylo.kotlinmessenger.main.view.MainActivity
 import com.kyrylo.kotlinmessenger.utilities.CommonUtil
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.activity_register.*
@@ -57,6 +58,8 @@ abstract class BaseFragment : Fragment(), MVPView {
     }
 
     fun getBaseActivity() = parentActivity
+
+    fun getMainActivity() = (parentActivity as MainActivity)
 
     private fun performDependencyInjection() = AndroidSupportInjection.inject(this)
 

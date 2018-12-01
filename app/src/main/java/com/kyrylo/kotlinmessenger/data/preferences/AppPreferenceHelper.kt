@@ -8,13 +8,16 @@ import com.kyrylo.kotlinmessenger.utilities.AppConstants
 import javax.inject.Inject
 import com.kyrylo.kotlinmessenger.di.PreferenceInfo
 import com.google.gson.Gson
+import com.google.android.gms.flags.impl.SharedPreferencesFactory.getSharedPreferences
+
+
 
 
 
 /**
  * Created by jyotidubey on 04/01/18.
  */
-class AppPreferenceHelper @Inject constructor(context: Context,
+class AppPreferenceHelper @Inject constructor(val context: Context,
                                               @PreferenceInfo private val prefFileName: String) : PreferenceHelper {
     companion object {
         private val PREF_KEY_USER_LOGGED_IN_MODE = "PREF_KEY_USER_LOGGED_IN_MODE"
@@ -43,6 +46,10 @@ class AppPreferenceHelper @Inject constructor(context: Context,
             AppConstants.NULL_INDEX -> null
             else -> userId
         }
+    }
+
+    override fun cleanSharedPreference() {
+        getSharedPreferences(context).edit().clear().apply()
     }
 
     override fun getCurrentUser(): User? {

@@ -2,6 +2,7 @@ package com.kyrylo.kotlinmessenger.di.module
 
 import android.app.Application
 import android.content.Context
+import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -18,6 +19,7 @@ import dagger.Provides
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Singleton
 import com.kyrylo.kotlinmessenger.utilities.SchedulerProvider
+import java.lang.Exception
 import javax.inject.Named
 
 /**
@@ -50,27 +52,33 @@ class AppModule {
 
     @Provides
     @Named("LatestMessages")
-    internal fun provideQueryMessage(@UserUID userUID: String) : DatabaseReference {
-        return FirebaseDatabase.getInstance().getReference("/latest-messages/$userUID")
-    }
+    internal fun provideQueryMessage(@UserUID userUID: String) : DatabaseReference =
+            FirebaseDatabase.getInstance().getReference("/latest-messages/$userUID")
+
 
     @Provides
     @Named("CurrentUser")
-    internal fun provideCurrentUser(@UserUID userUID: String) : DatabaseReference {
-       return FirebaseDatabase.getInstance().getReference("/users/$userUID")
-    }
+    internal fun provideCurrentUser(@UserUID userUID: String) : DatabaseReference =
+            FirebaseDatabase.getInstance().getReference("/users/$userUID")
+
 
     @Provides
     @Named("UserList")
-    internal fun provideUserList() : DatabaseReference {
-        return FirebaseDatabase.getInstance().getReference("/users")
+    internal fun provideUserList() : DatabaseReference =
+            FirebaseDatabase.getInstance().getReference("/users")
 
-    }
+
 
     @Provides
     @UserUID
-    internal fun provideUserUID() : String{
-        return FirebaseAuth.getInstance().uid!!
+    internal fun provideUserUID() : String {
+        if(FirebaseAuth.getInstance().currentUser != null) {
+            return FirebaseAuth.getInstance().currentUser!!.uid
+        }
+        else{
+            return ""
+        }
     }
+
 
 }

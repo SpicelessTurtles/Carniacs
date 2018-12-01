@@ -27,10 +27,12 @@ class SplashPresenter<V : SplashMVPView, I : SplashMVPInteractor> @Inject intern
                 e.printStackTrace()
             }
         }
-           /* if (isUserLoggedIn())
+            
+            if (isUserLoggedIn())
                 it.openMainActivity()
-            else*/
+            else
                 it.openLoginActivity()
+
         }).start()
     }
 
